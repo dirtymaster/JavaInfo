@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Data</title>
+    <link href="../../style/common.css" rel="stylesheet">
+    <link href="../../style/data.css" rel="stylesheet">
+    <link href="../../style/table.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="menu">
+        <a href="/main">Main</a>
+        <a href="/data">Data</a>
+        <a href="/operations">Operations</a>
+    </div>
+    <div class="title">Data</div>
+</header>
+<main>
+    <div class="tablename" th:text="${tablename}"></div>
+    <div class="operations">
+        <a th:href="@{/data/{tablename}(tablename=${table})/get}">Get record ></a>
+        <a th:href="@{/data/{tablename}(tablename=${table})/getall}">Get all records ></a>
+        <a th:href="@{/data/{tablename}(tablename=${table})/insert}">Insert new record ></a>
+        <a th:href="@{/data/{tablename}(tablename=${table})/update}">Update record ></a>
+        <a th:href="@{/data/{tablename}(tablename=${table})/delete}">Delete record ></a>
+    </div>
+</main>
+</body>
+</html>
