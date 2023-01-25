@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: pilafber
-Build-Jdk: BellSoft Liberica version 1.8.0_352
+Built-By: rafael
+Build-Jdk: Oracle OpenJDK version 19.0.1
 

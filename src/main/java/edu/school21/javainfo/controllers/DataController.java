@@ -35,6 +35,6 @@ public class DataController {
     public String get(
             @PathVariable("tablename") String tablename, Model model) {
         model.addAttribute("tablename", tablename);
-        return 
+        return
     }
 }
