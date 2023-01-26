@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Data</title>
+    <link href="../../style/common.css" rel="stylesheet">
+    <link href="../../style/table.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="menu">
+        <a href="/main">Main</a>
+        <a href="/data">Data</a>
+        <a href="/operations">Operations</a>
+    </div>
+    <a href="/data" class="title">Data</a>
+</header>
+<main>
+    <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
+    <table>
+        <div th:each="fieldName : ${namesOfFields}">
+            <td th:text="${fieldName}"></td>
+        </div>
+        <tr th:each="object : ${fields}">
+            <div th:each="fieldOfObject : ${object}">
+                <td class="table_data" th:text="${fieldOfObject}"></td>
+            </div>
+        </tr>
+    </table>
+</main>
+</body>
+</html>

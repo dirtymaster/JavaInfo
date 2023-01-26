@@ -1,4 +1,4 @@
-main * {
+.tables_container * {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -24,4 +24,3 @@ main * {
 .tables * *:hover {
     color: black;
 }
-

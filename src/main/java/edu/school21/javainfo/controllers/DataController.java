@@ -31,10 +31,11 @@ public class DataController {
         return "html/data/table";
     }
 
-    @GetMapping("/{tablename}/get")
+    @GetMapping("/{tablename}/getall")
     public String get(
             @PathVariable("tablename") String tablename, Model model) {
-        model.addAttribute("tablename", tablename);
-        return
+        model.addAttribute("namesOfFields", dao.getNamesOfFields(tablename));
+        model.addAttribute("fields", dao.getAll(tablename));
+        return "html/data/getall";
     }
 }

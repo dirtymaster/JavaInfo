@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Data</title>
@@ -13,12 +13,14 @@
         <a href="/data">Data</a>
         <a href="/operations">Operations</a>
     </div>
-    <div class="title">Data</div>
+    <a href="/data" class="title">Data</a>
 </header>
 <main>
-    <div class="tables">
-        <div th:each="table : ${tables}">
-            <a th:href="@{/data/{tablename}(tablename=${table})}" th:text="${table}"></a>
+    <div class="tables_container">
+        <div class="tables">
+            <div th:each="table : ${tables}">
+                <a th:href="@{/data/{tablename}(tablename=${table})}" th:text="${table}"></a>
+            </div>
         </div>
     </div>
 </main>

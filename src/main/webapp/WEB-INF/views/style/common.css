@@ -46,6 +46,10 @@ header {
     margin: 10px;
     font-family: SFProDisplay-Medium, serif;
     font-size: 30pt;
+    color: lightgray;
+}
+
+.title:hover {
     color: white;
 }
 

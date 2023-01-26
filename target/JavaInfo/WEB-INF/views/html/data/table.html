@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Data</title>
     <link href="../../style/common.css" rel="stylesheet">
-    <link href="../../style/data.css" rel="stylesheet">
     <link href="../../style/table.css" rel="stylesheet">
 </head>
 <body>
@@ -14,16 +13,16 @@
         <a href="/data">Data</a>
         <a href="/operations">Operations</a>
     </div>
-    <div class="title">Data</div>
+    <a href="/data" class="title">Data</a>
 </header>
 <main>
-    <div class="tablename" th:text="${tablename}"></div>
+    <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
     <div class="operations">
-        <a th:href="@{/data/{tablename}(tablename=${table})/get}">Get record ></a>
-        <a th:href="@{/data/{tablename}(tablename=${table})/getall}">Get all records ></a>
-        <a th:href="@{/data/{tablename}(tablename=${table})/insert}">Insert new record ></a>
-        <a th:href="@{/data/{tablename}(tablename=${table})/update}">Update record ></a>
-        <a th:href="@{/data/{tablename}(tablename=${table})/delete}">Delete record ></a>
+<!--        <a th:href="/data/${tablename}/get">Get record ></a>-->
+        <a th:href=@{/data/{tablename}/getall(tablename=${tablename})}>Get all records ></a>
+<!--        <a th:href="/data/${tablename}/insert">Insert new record ></a>-->
+<!--        <a th:href="/data/${tablename}/update">Update record ></a>-->
+<!--        <a th:href="/data/${tablename}/delete">Delete record ></a>-->
     </div>
 </main>
 </body>
