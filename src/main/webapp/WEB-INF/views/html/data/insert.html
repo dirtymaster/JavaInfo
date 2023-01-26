@@ -17,13 +17,15 @@
 </header>
 <main>
     <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
-    <div class="operations">
-<!--        <a th:href="/data/${tablename}/get">Get record ></a>-->
-        <a th:href=@{/data/{tablename}/getall(tablename=${tablename})}>Get all records ></a>
-        <a th:href=@{/data/{tablename}/insert(tablename=${tablename})}>Insert new record ></a>
-<!--        <a th:href="/data/${tablename}/update">Update record ></a>-->
-<!--        <a th:href="/data/${tablename}/delete">Delete record ></a>-->
-    </div>
+    <form th:method="POST" th:action="@{data/{tablename}/new(tablename=${tablename})}" th:object="${object}">
+<!--        <div th:each="field : ${fields}">-->
+<!--            <label for="${field.getName()}" th:text="${field.getName()}:"></label>-->
+<!--            <input type="text" th:field='*{${field.getName().substring(field.getName().lastIndexOf(".") + 1)}}' id="${field.getName()}">-->
+<!--            <div>aboba</div>-->
+<!--        </div>-->
+        <label for="title">Title:</label>
+        <input type="text" th:field="*{title}" id="title">
+    </form>
 </main>
 </body>
 </html>

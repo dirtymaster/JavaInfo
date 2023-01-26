@@ -1,13 +1,16 @@
 package edu.school21.javainfo.dao;
 
-import edu.school21.javainfo.model.Task;
-import org.hibernate.Criteria;
+import edu.school21.javainfo.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,8 +18,18 @@ import java.util.List;
 
 @Component
 public class DAO {
-    private SessionFactory sessionFactory = new Configuration()
-            .addAnnotatedClass(Task.class).buildSessionFactory();
+    private final SessionFactory sessionFactory = new Configuration()
+            .addAnnotatedClass(Check.class)
+            .addAnnotatedClass(Friend.class)
+            .addAnnotatedClass(P2p.class)
+            .addAnnotatedClass(Peer.class)
+            .addAnnotatedClass(Recommendation.class)
+            .addAnnotatedClass(Task.class)
+            .addAnnotatedClass(Timetracking.class)
+            .addAnnotatedClass(Transferredpoint.class)
+            .addAnnotatedClass(Verter.class)
+            .addAnnotatedClass(Xp.class)
+            .buildSessionFactory();
 
     private static final String URL
             = "jdbc:postgresql://localhost:5432/postgres";
@@ -27,7 +40,7 @@ public class DAO {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         try {
@@ -61,47 +74,80 @@ public class DAO {
             session.beginTransaction();
 
             Class<?> myClass = getTableClass(tableName);
-            Criteria criteria = session.createCriteria(myClass);
-            List entities = criteria.list();
+
+            EntityManager em = session.getEntityManagerFactory()
+                    .createEntityManager();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery cq = builder.createQuery(myClass);
+            Root root = cq.from(myClass);
+            cq.select(root);
+            List entities = em.createQuery(cq).getResultList();
             for (Object object : entities) {
                 List<String> fieldsOfCurrentObject = new ArrayList<>();
                 fields.add(fieldsOfCurrentObject);
                 for (Field field : myClass.getFields()) {
                     if (field.getType() == int.class) {
-                        fieldsOfCurrentObject.add(String.valueOf(field.get(object)));
+                        fieldsOfCurrentObject.add(
+                                String.valueOf(field.get(object)));
+                    } else if (field.getType() == Date.class
+                            || field.getType() == Timestamp.class
+                            || field.getType() == Time.class) {
+                        fieldsOfCurrentObject.add(field.get(object).toString());
                     } else {
                         fieldsOfCurrentObject.add((String) field.get(object));
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
             session.close();
         }
         return fields;
     }
 
-    public List<String> getNamesOfFields(String tableName) {
-        List<String> names = new ArrayList<>();
+    public List<Field> getFields(String tableName) {
+        List<Field> fields = new ArrayList<>();
 
         Class<?> myClass = getTableClass(tableName);
         for (Field field : myClass.getFields()) {
-            names.add(field.getName());
+            fields.add(field);
         }
-        return names;
+        return fields;
     }
 
-    private Class<?> getTableClass(String tableName) {
-        String className = Character.toUpperCase(tableName.charAt(0)) + tableName.substring(1);
+    public Object getObject(String tableName) {
+        Class<?> myClass = getTableClass(tableName);
+        try {
+            return myClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Class<?> getTableClass(String tableName) {
+        String className = Character.toUpperCase(tableName.charAt(0))
+                + tableName.substring(1);
         if (className.endsWith("s")) {
             className = className.substring(0, className.length() - 1);
         }
         try {
-            return Class.forName("edu.school21.javainfo.model." + className);
+            return Class.forName(
+                    "edu.school21.javainfo.model." + className);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insert(String tableName, Object object) {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            session.save(object);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
         }
     }
 

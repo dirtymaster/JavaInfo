@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This example writes some trailer fields to the HTTP response.
+ * This example writes some trailer values to the HTTP response.
  */
 public class ResponseTrailers extends HttpServlet {
 
@@ -47,7 +47,7 @@ public class ResponseTrailers extends HttpServlet {
 
         PrintWriter pw  = resp.getWriter();
 
-        pw.print("This response should include trailer fields.");
+        pw.print("This response should include trailer values.");
     }
 
 

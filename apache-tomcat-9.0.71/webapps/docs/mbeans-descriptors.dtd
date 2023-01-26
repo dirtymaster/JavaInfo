@@ -129,7 +129,7 @@
 <!ATTLIST constructor       name         CDATA                #IMPLIED> <!-- %VariableName; -->
 
 
-<!-- The "descriptor" element groups a set of descriptor fields whose
+<!-- The "descriptor" element groups a set of descriptor values whose
      values will be included in the Descriptor for the corresponding
      metadata info classes.
 -->

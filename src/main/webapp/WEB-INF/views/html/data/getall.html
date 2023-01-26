@@ -5,6 +5,7 @@
     <title>Data</title>
     <link href="../../style/common.css" rel="stylesheet">
     <link href="../../style/table.css" rel="stylesheet">
+    <link href="../../style/getall.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -18,12 +19,12 @@
 <main>
     <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
     <table>
-        <div th:each="fieldName : ${namesOfFields}">
-            <td th:text="${fieldName}"></td>
+        <div th:each="field : ${fields}">
+            <td th:text="${field.getName()}"></td>
         </div>
-        <tr th:each="object : ${fields}">
-            <div th:each="fieldOfObject : ${object}">
-                <td class="table_data" th:text="${fieldOfObject}"></td>
+        <tr th:each="object : ${values}">
+            <div th:each="valueOfObject : ${object}">
+                <td class="table_data" th:text="${valueOfObject}"></td>
             </div>
         </tr>
     </table>

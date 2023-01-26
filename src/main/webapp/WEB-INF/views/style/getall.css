@@ -1,0 +1,26 @@
+table {
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 75%;
+}
+
+tr {
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+td, th {
+    display: table-cell;
+    padding: 10px;
+    font-family: SFProDisplay-Light, serif;
+    font-size: 13pt;
+}
+
+td:nth-child(odd) {
+    background-color: #f6f6f6;
+}
+
+td:nth-child(even) {
+    background-color: white;
+}

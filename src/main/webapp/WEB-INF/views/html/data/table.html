@@ -20,7 +20,7 @@
     <div class="operations">
 <!--        <a th:href="/data/${tablename}/get">Get record ></a>-->
         <a th:href=@{/data/{tablename}/getall(tablename=${tablename})}>Get all records ></a>
-<!--        <a th:href="/data/${tablename}/insert">Insert new record ></a>-->
+        <a th:href=@{/data/{tablename}/insert(tablename=${tablename})}>Insert new record ></a>
 <!--        <a th:href="/data/${tablename}/update">Update record ></a>-->
 <!--        <a th:href="/data/${tablename}/delete">Delete record ></a>-->
     </div>
