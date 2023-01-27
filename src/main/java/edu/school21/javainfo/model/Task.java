@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Task {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String title;
 
     @Column

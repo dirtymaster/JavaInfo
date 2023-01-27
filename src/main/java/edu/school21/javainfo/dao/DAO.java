@@ -139,11 +139,12 @@ public class DAO {
         }
     }
 
-    public void insert(String tableName, Object object) {
+    public void insert(Friend object) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
             session.save(object);
+            session.getTransaction().commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

@@ -1,13 +1,11 @@
 package edu.school21.javainfo.controllers;
 
 import edu.school21.javainfo.dao.DAO;
+import edu.school21.javainfo.model.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Field;
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/data")
@@ -43,21 +41,15 @@ public class DataController {
     @GetMapping("/{tablename}/insert")
     public String insert(@PathVariable("tablename") String tablename,
                          Model model) {
-        model.addAttribute("object",
-                dao.getTableClass(tablename).cast(dao.getObject(tablename)));
+        model.addAttribute("object", new Friend());
         model.addAttribute("fields", dao.getFields(tablename));
-        System.out.println(dao.getTableClass(tablename).cast(dao.getObject(tablename)).getClass().getName());
-        for (Field field : dao.getTableClass(tablename).cast(dao.getObject(tablename)).getClass().getFields()) {
-            System.out.println(field.getName().substring(field.getName().lastIndexOf(".") + 1));
-        }
         return "html/data/insert";
     }
 
-//    @PostMapping("/{tablename}/new")
-//    public String create(@ModelAttribute("object") Object object) {
-//        Field field = null;
-//        field.g
-//        dao.
-//        return "redirect:/{tablename}/getall";
-//    }
+    @PostMapping("/{tablename}/new")
+    public String create(@ModelAttribute("object") Friend object) {
+        System.out.println(object.peer1);
+        dao.insert(object);
+        return "redirect:/data/{tablename}/getall";
+    }
 }

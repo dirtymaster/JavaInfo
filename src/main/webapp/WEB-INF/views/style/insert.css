@@ -1,0 +1,39 @@
+form {
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Form input fields */
+input[type="text"] {
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: SFProDisplay-Medium, serif;
+    font-size: 15pt;
+    margin-bottom: 8px;
+}
+
+/* Form labels */
+label {
+    font-size: 13pt;
+    font-weight: 600;
+    margin-bottom: 3px;
+    display: block;
+    font-family: SFProDisplay-Light, serif;
+}
+
+/* Form submit button */
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    width: 100%;
+}

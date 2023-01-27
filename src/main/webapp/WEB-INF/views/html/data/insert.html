@@ -5,6 +5,7 @@
     <title>Data</title>
     <link href="../../style/common.css" rel="stylesheet">
     <link href="../../style/table.css" rel="stylesheet">
+    <link href="../../style/insert.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -17,14 +18,14 @@
 </header>
 <main>
     <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
-    <form th:method="POST" th:action="@{data/{tablename}/new(tablename=${tablename})}" th:object="${object}">
-<!--        <div th:each="field : ${fields}">-->
-<!--            <label for="${field.getName()}" th:text="${field.getName()}:"></label>-->
-<!--            <input type="text" th:field='*{${field.getName().substring(field.getName().lastIndexOf(".") + 1)}}' id="${field.getName()}">-->
-<!--            <div>aboba</div>-->
-<!--        </div>-->
-        <label for="title">Title:</label>
-        <input type="text" th:field="*{title}" id="title">
+    <form th:method="POST" th:action="@{/data/{tablename}/new(tablename=${tablename})}" th:object="${object}">
+        <div th:each="field : ${object.getClass().getFields()}">
+            <div class="input_container">
+                <label th:text="${field.getName()}"></label>
+                <input type="text" th:value='${field.get(object)}'/>
+            </div>
+        </div>
+        <input type="submit" value="Submit"/>
     </form>
 </main>
 </body>
