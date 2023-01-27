@@ -116,8 +116,8 @@ public class DAO {
         return fields;
     }
 
-    public Object getObject(String tableName) {
-        Class<?> myClass = getTableClass(tableName);
+    public <T> T getObject(String tableName) {
+        Class<T> myClass = getTableClass(tableName);
         try {
             return myClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
@@ -125,21 +125,21 @@ public class DAO {
         }
     }
 
-    public Class<?> getTableClass(String tableName) {
+    public <T> Class<T> getTableClass(String tableName) {
         String className = Character.toUpperCase(tableName.charAt(0))
                 + tableName.substring(1);
         if (className.endsWith("s")) {
             className = className.substring(0, className.length() - 1);
         }
         try {
-            return Class.forName(
+            return (Class<T>) Class.forName(
                     "edu.school21.javainfo.model." + className);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void insert(Friend object) {
+    public <T> void insert(T object) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();

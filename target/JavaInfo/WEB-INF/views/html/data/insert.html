@@ -22,7 +22,7 @@
         <div th:each="field : ${object.getClass().getFields()}">
             <div class="input_container">
                 <label th:text="${field.getName()}"></label>
-                <input type="text" th:field='*{${field.getName()}}'/>
+                <input type="text" th:field='${field.getName()}}'/>
             </div>
         </div>
         <input type="submit" value="Submit"/>

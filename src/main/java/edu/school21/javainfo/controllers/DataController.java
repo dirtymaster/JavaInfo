@@ -41,16 +41,15 @@ public class DataController {
     }
 
     @GetMapping("/{tablename}/insert")
-    public String insert(@PathVariable("tablename") String tablename,
+    public <T> String insert(@PathVariable("tablename") String tablename,
                          Model model) {
-        model.addAttribute("object", new Friend());
+        model.addAttribute("object", (T) dao.getObject(tablename));
         model.addAttribute("fields", dao.getFields(tablename));
         return "html/data/insert";
     }
 
     @PostMapping("/{tablename}/new")
-    public String create(@ModelAttribute("object") Friend object) {
-        System.out.println(object.peer1);
+    public <T> String create(@ModelAttribute("object") T object) {
         dao.insert(object);
         return "redirect:/data/{tablename}/getall";
     }
