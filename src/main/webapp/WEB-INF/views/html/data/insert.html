@@ -22,10 +22,16 @@
     <form th:method="POST" th:action="@{/data/{tablename}/new(tablename=${tablename})}" th:object="${object}">
         <div th:each="field : ${object.getClass().getFields()}">
             <div class="input_container">
-<!--                <label  th:text="${field.name}"></label>-->
-                <input type="text" th:field="${field.name}"/>
+                <label  th:text="${field.name}"></label>
+                <input type="text" th:field="*{__${field.name}__}"/>
             </div>
         </div>
+<!--        <label for="id">Enter id:</label>-->
+<!--        <input type="text" th:field="*{id}" id="id"/>-->
+<!--        <label for="peer1">Enter peer1:</label>-->
+<!--        <input type="text" th:field="*{peer1}" id="peer1"/>-->
+<!--        <label for="peer2">Enter peer2:</label>-->
+<!--        <input type="text" th:field="*{peer2}" id="peer2"/>-->
         <input type="submit" value="Submit"/>
     </form>
 </main>
