@@ -17,21 +17,43 @@
     <a href="/data" class="title">Data</a>
 </header>
 <main>
-    <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename" th:text="${tablename}"></a>
+    <a th:href="@{/data/{tablename}(tablename=${tablename})}" class="tablename"
+       th:text="${tablename}"></a>
     <div th:value="${object.getClass()}"></div>
-    <form th:method="POST" th:action="@{/data/{tablename}/new(tablename=${tablename})}" th:object="${object}">
-        <div th:each="field : ${object.getClass().getFields()}">
+    <form th:method="POST"
+          th:action="@{/data/{tablename}/new(tablename=${tablename})}"
+          th:object="${object}">
+        <div th:each="field : ${object.getClass().getFields()}"
+             th:if="${field.name} != 'id'">
             <div class="input_container">
-                <label  th:text="${field.name}"></label>
-                <input type="text" th:field="*{__${field.name}__}"/>
+                <label th:text="${field.name}"></label>
+                <th:block th:if="${field.getType().getSimpleName()} == 'Date'">
+                    <input type="date" th:field="*{__${field.name}__}"/>
+                </th:block>
+                <th:block th:if="${field.getType().getSimpleName()} == 'Time'">
+                    <input type="time" th:field="*{__${field.name}__}"/>
+                </th:block>
+                <th:block th:if="${field.getType().getSimpleName()} == 'Timestamp'">
+                    <input type="datetime-local" th:field="*{__${field.name}__}"/>
+                </th:block>
+                <th:block
+                        th:if="${field.getType().getSimpleName()} == 'String'">
+                    <th:block th:if="${field.name} == 'state'">
+                        <select th:field="*{__${field.name}__}">
+                            <option value="Start">Start</option>
+                            <option value="Success">Success</option>
+                            <option value="Failure">Failure</option>
+                        </select>
+                    </th:block>
+                    <th:block th:if="${field.name} != 'state'">
+                        <input type="text" th:field="*{__${field.name}__}"/>
+                    </th:block>
+                </th:block>
+                <th:block th:if="${field.getType().getSimpleName()} == 'int'">
+                    <input type="number" th:field="*{__${field.name}__}"/>
+                </th:block>
             </div>
         </div>
-<!--        <label for="id">Enter id:</label>-->
-<!--        <input type="text" th:field="*{id}" id="id"/>-->
-<!--        <label for="peer1">Enter peer1:</label>-->
-<!--        <input type="text" th:field="*{peer1}" id="peer1"/>-->
-<!--        <label for="peer2">Enter peer2:</label>-->
-<!--        <input type="text" th:field="*{peer2}" id="peer2"/>-->
         <input type="submit" value="Submit"/>
     </form>
 </main>

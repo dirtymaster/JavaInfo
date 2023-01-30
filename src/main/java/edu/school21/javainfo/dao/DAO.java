@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.Field;
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,16 +140,24 @@ public class DAO {
         }
     }
 
-    public <T> void insert(T object) {
-        Session session = sessionFactory.getCurrentSession();
-        try {
+    public <T> void insert(T object, String tableName) {
+        try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
+            for (Field field : object.getClass().getFields()) {
+                if (field.getName().equals("id")) {
+                    BigInteger maxId = (BigInteger) session.createSQLQuery(
+                            "SELECT max(id) FROM " + tableName).uniqueResult();
+
+                    Integer nextId = maxId == null ? 1 : maxId.intValue() + 1;
+                    field.set(object, nextId.intValue());
+                    break;
+                }
+            }
+
             session.save(object);
             session.getTransaction().commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            session.close();
         }
     }
 

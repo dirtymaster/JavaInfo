@@ -14,4 +14,28 @@ public class Peer {
     public String nickname;
     @Column
     public Date birthday;
+
+    public Peer() {
+    }
+
+    public Peer(String nickname, Date birthday) {
+        this.nickname = nickname;
+        this.birthday = birthday;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }

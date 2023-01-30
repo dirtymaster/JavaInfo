@@ -4,15 +4,23 @@ form {
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
+.input_container {
+    margin-bottom: 8px;
+}
+
 /* Form input fields */
-input[type="text"] {
+input[type="text"],
+select,
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
     background-color: lightgray;
     border: none;
     border-radius: 5px;
     padding: 5px;
     font-family: SFProDisplay-Medium, serif;
     font-size: 15pt;
-    margin-bottom: 8px;
 }
 
 /* Form labels */
@@ -24,14 +32,13 @@ label {
     font-family: SFProDisplay-Light, serif;
 }
 
-/* Form submit button */
 input[type="submit"] {
     background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 12px;
-    font-size: 18px;
+    font-size: 15pt;
     font-weight: 600;
     cursor: pointer;
     margin-top: 16px;

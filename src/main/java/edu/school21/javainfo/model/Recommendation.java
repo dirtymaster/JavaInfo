@@ -15,4 +15,37 @@ public class Recommendation {
     public String peer;
     @Column
     public String recommendedPeer;
+
+    public Recommendation() {
+    }
+
+    public Recommendation(int id, String peer, String recommendedPeer) {
+        this.id = id;
+        this.peer = peer;
+        this.recommendedPeer = recommendedPeer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPeer() {
+        return peer;
+    }
+
+    public void setPeer(String peer) {
+        this.peer = peer;
+    }
+
+    public String getRecommendedPeer() {
+        return recommendedPeer;
+    }
+
+    public void setRecommendedPeer(String recommendedPeer) {
+        this.recommendedPeer = recommendedPeer;
+    }
 }

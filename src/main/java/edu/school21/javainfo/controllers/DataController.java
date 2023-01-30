@@ -1,17 +1,13 @@
 package edu.school21.javainfo.controllers;
 
-import com.google.gson.Gson;
 import edu.school21.javainfo.dao.DAO;
 import edu.school21.javainfo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.beans.PropertyEditorSupport;
-import java.sql.Time;
+import java.lang.reflect.Field;
 
 @Controller
 @RequestMapping("/data")
@@ -44,20 +40,6 @@ public class DataController {
         return "html/data/getall";
     }
 
-//    @GetMapping("/{tablename}/insert")
-//    public <T> String insert(@PathVariable("tablename") String tablename,
-//                         Model model) {
-//        model.addAttribute("object", (T) dao.getObject(tablename));
-//        model.addAttribute("fields", dao.getFields(tablename));
-//        return "html/data/insert";
-//    }
-//
-//    @RequestMapping(value = "/{tablename}/new", method = RequestMethod.POST)
-//    public <T> String create(@ModelAttribute("object") T object) {
-//        dao.insert(object);
-//        return "redirect:/data/{tablename}/getall";
-//    }
-
     @GetMapping("/{tablename}/insert")
     public <T> String insert(@PathVariable("tablename") String tablename,
                              Model model) {
@@ -67,52 +49,52 @@ public class DataController {
 
     @PostMapping("/checks/new")
     public <T> String create(@ModelAttribute("object") Check check) {
-        dao.insert(check);
+        dao.insert(check, "checks");
         return "redirect:/data/check/getall";
     }
     @PostMapping("/friends/new")
     public <T> String create(@ModelAttribute("object") Friend friend) {
-        dao.insert(friend);
+        dao.insert(friend, "friends");
         return "redirect:/data/friends/getall";
     }
     @PostMapping("/p2p/new")
     public <T> String create(@ModelAttribute("object") P2p p2p) {
-        dao.insert(p2p);
+        dao.insert(p2p, "p2p");
         return "redirect:/data/p2p/getall";
     }
     @PostMapping("/peers/new")
     public <T> String create(@ModelAttribute("object") Peer peer) {
-        dao.insert(peer);
+        dao.insert(peer, "peers");
         return "redirect:/data/peers/getall";
     }
     @PostMapping("/recommendations/new")
     public <T> String create(@ModelAttribute("object") Recommendation recommendation) {
-        dao.insert(recommendation);
+        dao.insert(recommendation, "recommendations");
         return "redirect:/data/recommendations/getall";
     }
     @PostMapping("/tasks/new")
     public <T> String create(@ModelAttribute("object") Task task) {
-        dao.insert(task);
+        dao.insert(task, "tasks");
         return "redirect:/data/tasks/getall";
     }
     @PostMapping("/timetracking/new")
     public <T> String create(@ModelAttribute("object") Timetracking timetracking) {
-        dao.insert(timetracking);
+        dao.insert(timetracking, "timetracking");
         return "redirect:/data/timetracking/getall";
     }
-    @PostMapping("/transferredpoint/new")
+    @PostMapping("/transferredpoints/new")
     public <T> String create(@ModelAttribute("object") Transferredpoint transferredpoint) {
-        dao.insert(transferredpoint);
-        return "redirect:/data/transferredpoint/getall";
+        dao.insert(transferredpoint, "transferredpoints");
+        return "redirect:/data/transferredpoints/getall";
     }
     @PostMapping("/verter/new")
     public <T> String create(@ModelAttribute("object") Verter verter) {
-        dao.insert(verter);
+        dao.insert(verter, "verter");
         return "redirect:/data/verter/getall";
     }
     @PostMapping("/xp/new")
     public <T> String create(@ModelAttribute("object") Xp xp) {
-        dao.insert(xp);
+        dao.insert(xp, "xp");
         return "redirect:/data/xp/getall";
     }
 }
