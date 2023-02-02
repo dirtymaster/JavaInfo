@@ -20,12 +20,12 @@ public class Timetracking {
     @Column
     public Time time;
     @Column
-    public String state;
+    public int state;
 
     public Timetracking() {
     }
 
-    public Timetracking(int id, String peer, Date date, Time time, String state) {
+    public Timetracking(int id, String peer, Date date, Time time, int state) {
         this.id = id;
         this.peer = peer;
         this.date = date;
@@ -65,11 +65,11 @@ public class Timetracking {
         this.time = time;
     }
 
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
     }
 }

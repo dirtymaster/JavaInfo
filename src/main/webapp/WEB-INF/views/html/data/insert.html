@@ -27,31 +27,26 @@
              th:if="${field.name} != 'id'">
             <div class="input_container">
                 <label th:text="${field.name}"></label>
-                <th:block th:if="${field.getType().getSimpleName()} == 'Date'">
-                    <input type="date" th:field="*{__${field.name}__}"/>
-                </th:block>
-                <th:block th:if="${field.getType().getSimpleName()} == 'Time'">
-                    <input type="time" th:field="*{__${field.name}__}"/>
-                </th:block>
-                <th:block th:if="${field.getType().getSimpleName()} == 'Timestamp'">
-                    <input type="datetime-local" th:field="*{__${field.name}__}"/>
-                </th:block>
+                <input th:if="${field.getType().getSimpleName()} == 'Date'"
+                       type="date" th:field="*{__${field.name}__}"/>
+                <input th:if="${field.getType().getSimpleName()} == 'Time'"
+                       type="time" th:field="*{__${field.name}__}"/>
+                <input th:if="${field.getType().getSimpleName()} == 'Timestamp'"
+                       type="datetime-local"
+                       th:field="*{__${field.name}__}"/>
                 <th:block
                         th:if="${field.getType().getSimpleName()} == 'String'">
-                    <th:block th:if="${field.name} == 'state'">
-                        <select th:field="*{__${field.name}__}">
-                            <option value="Start">Start</option>
-                            <option value="Success">Success</option>
-                            <option value="Failure">Failure</option>
-                        </select>
-                    </th:block>
-                    <th:block th:if="${field.name} != 'state'">
-                        <input type="text" th:field="*{__${field.name}__}"/>
-                    </th:block>
+                    <select th:if="${field.name} == 'state'"
+                            th:field="*{__${field.name}__}">
+                        <option value="Start">Start</option>
+                        <option value="Success">Success</option>
+                        <option value="Failure">Failure</option>
+                    </select>
+                    <input th:if="${field.name} != 'state'" type="text"
+                           th:field="*{__${field.name}__}"/>
                 </th:block>
-                <th:block th:if="${field.getType().getSimpleName()} == 'int'">
-                    <input type="number" th:field="*{__${field.name}__}"/>
-                </th:block>
+                <input th:if="${field.getType().getSimpleName()} == 'int'"
+                       type="number" th:field="*{__${field.name}__}"/>
             </div>
         </div>
         <input type="submit" value="Submit"/>
