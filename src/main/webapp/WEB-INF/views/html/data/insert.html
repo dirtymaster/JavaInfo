@@ -21,7 +21,6 @@
        th:text="${tablename}"></a>
     <div th:value="${object.getClass()}"></div>
     <form th:method="POST"
-          th:action="@{/data/{tablename}/new(tablename=${tablename})}"
           th:object="${object}">
         <div th:each="field : ${object.getClass().getFields()}"
              th:if="${field.name} != 'id'">
